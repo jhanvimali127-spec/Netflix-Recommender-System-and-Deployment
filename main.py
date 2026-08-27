@@ -23,49 +23,6 @@ def create_similarity():
     similarity = cosine_similarity(count_matrix)
     return data,similarity
 
-
-# web scraping to get user reviews from IMDB site
-sauce = urllib.request.urlopen('https://www.imdb.com/title/{}/reviews?ref_=tt_ov_rt'.format(imdb_id)).read()
-soup = bs.BeautifulSoup(sauce,'lxml')
-soup_result = soup.find_all("div",{"class":"text show-more__control"})
-
-# Get user reviews from IMDb
-reviews_list = []
-reviews_status = []
-
-try:
-    url = 'https://www.imdb.com/title/{}/reviews/'.format(imdb_id)
-
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131.0.0.0 Safari/537.36'
-    }
-
-    response = requests.get(url, headers=headers, timeout=10)
-
-    if response.status_code == 200:
-        soup = bs.BeautifulSoup(response.text, 'lxml')
-        soup_result = soup.find_all("div", {"class": "text show-more__control"})
-
-        for review in soup_result:
-            if review.get_text(strip=True):
-                review_text = review.get_text(strip=True)
-                reviews_list.append(review_text)
-
-                movie_review_list = np.array([review_text])
-                movie_vector = vectorizer.transform(movie_review_list)
-                pred = clf.predict(movie_vector)
-
-                reviews_status.append('Good' if pred else 'Bad')
-
-except Exception as e:
-    print("IMDb reviews could not be loaded:", e)
-
-# Combining reviews and comments
-movie_reviews = {
-    reviews_list[i]: reviews_status[i]
-    for i in range(len(reviews_list))
-}
-
 def rcmd(m):
     m = m.lower()
     try:
