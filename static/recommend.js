@@ -12,7 +12,7 @@ $(function() {
   source.addEventListener('input', inputHandler);
 
   $('.movie-button').on('click',function(){
-    var my_api_key = 'Eec8c310417c986705d6936fb49f3fc6';
+    var my_api_key = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlZWM4YzMxMDQxN2M5ODY3MDVkNjkzNmZiNDlmM2ZjNiIsIm5iZiI6MTc4NzIwNjUxMC4yNzIsInN1YiI6IjZhODY5YjZlODdmMzZmNTY1ZTFmNjE5MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.k2uRcuv6F4XfU6CJac_cOVmWEZxAlUB-htd6_CGCwwA';
     var title = $('.movie').val();
     if (title=="") {
       $('.results').css('display','none');
@@ -26,7 +26,7 @@ $(function() {
 
 // will be invoked when clicking on the recommended movies
 function recommendcard(e){
-  var my_api_key = 'Eec8c310417c986705d6936fb49f3fc6';
+  var my_api_key = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlZWM4YzMxMDQxN2M5ODY3MDVkNjkzNmZiNDlmM2ZjNiIsIm5iZiI6MTc4NzIwNjUxMC4yNzIsInN1YiI6IjZhODY5YjZlODdmMzZmNTY1ZTFmNjE5MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.k2uRcuv6F4XfU6CJac_cOVmWEZxAlUB-htd6_CGCwwA';
   var title = e.getAttribute('title'); 
   load_details(my_api_key,title);
 }
