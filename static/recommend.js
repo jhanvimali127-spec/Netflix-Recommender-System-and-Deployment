@@ -233,9 +233,15 @@ function get_movie_posters(arr,my_api_key){
       type:'GET',
       url:'https://api.themoviedb.org/3/search/movie?api_key='+my_api_key+'&query='+arr[m],
       async: false,
-      success: function(m_data){
-        arr_poster_list.push('https://image.tmdb.org/t/p/original'+m_data.results[0].poster_path);
-      },
+      success: success: function(m_data){
+  if (m_data.results && m_data.results.length > 0 && m_data.results[0].poster_path) {
+    arr_poster_list.push(
+      'https://image.tmdb.org/t/p/original' + m_data.results[0].poster_path
+    );
+  } else {
+    arr_poster_list.push('');
+  }
+},
       error: function(){
         alert("Invalid Request!");
         $("#loader").delay(500).fadeOut();
