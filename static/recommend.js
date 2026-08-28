@@ -178,7 +178,7 @@ function get_individual_cast(movie_cast,my_api_key) {
     for(var cast_id in movie_cast.cast_ids){
       $.ajax({
         type:'GET',
-        url:'https://api.themoviedb.org/3/person/'+movie_cast.cast_ids[cast_id]+'?api_key='+my_api_key,
+       url:"https://api.themoviedb.org/3/movie/"+movie_id+"/credits?api_key="+my_api_key,
         async:false,
         success: function(cast_details){
           cast_bdays.push((new Date(cast_details.birthday)).toDateString().split(' ').slice(1).join(' '));
@@ -200,7 +200,7 @@ function get_movie_cast(movie_id,my_api_key){
     top_10 = [0,1,2,3,4,5,6,7,8,9];
     $.ajax({
       type:'GET',
-     url:'https://api.themoviedb.org/3/search/movie?api_key='+my_api_key+'&query='+encodeURIComponent(title),
+    url:"https://api.themoviedb.org/3/movie/"+movie_id+"/credits?api_key="+my_api_key,
       async:false,
       success: function(my_movie){
         if(my_movie.cast.length>=10){
